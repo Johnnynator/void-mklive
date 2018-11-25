@@ -143,7 +143,7 @@ fi
 
 # Be absolutely certain the platform is supported before continuing
 case "$PLATFORM" in
-    bananapi|beaglebone|cubieboard2|cubietruck|odroid-c2|odroid-u2|rpi|rpi2|rpi3|usbarmory|GCP|*-musl);;
+    bananapi|beaglebone|cubieboard2|cubietruck|odroid-c2|odroid-u2|rpi|rpi2|rpi3|usbarmory|pine64|GCP|*-musl);;
     *) die "The $PLATFORM is not supported, exiting..."
 esac
 
@@ -277,6 +277,9 @@ usbarmory*)
 ci20*)
     dd if="${ROOTFS}/boot/u-boot-spl.bin" of="${LOOPDEV}" obs=512 seek=1 >/dev/null 2>&1
     dd if="${ROOTFS}/boot/u-boot.img" of="${LOOPDEV}" obs=1K seek=14 >/dev/null 2>&1
+    ;;
+pine64*)
+    dd if="${ROOTFS}/boot/u-boot-sunxi-with-spl.bin" of="${LOOPDEV}" bs=1024 seek=8 >/dev/null 2>&1
     ;;
 GCP*)
     # Google Cloud Platform image configuration for Google Cloud
